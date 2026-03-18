@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simply Ship - The Easy Unity Build Server</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --panel-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(56, 189, 248, 0.1), transparent);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--panel-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+
+        .download-section {
+            background: rgba(56, 189, 248, 0.05);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 60px;
+            border: 1px dashed var(--accent-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 14px 32px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 10px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--accent-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>SIMPLY SHIP</h1>
+        <p>The painless, portable, and powerful automated build system for Unity developers.</p>
+        <div>
+            <a href="#download" class="btn">Get Started</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="features">
+            <div class="feature-card">
+                <h3>Multi-Platform</h3>
+                <p>Build for Windows, Linux, Mac, Android, and iOS from a single dashboard. Headless automation at its finest.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Portable & Zero-Install</h3>
+                <p>Run the <code>SimplyShip.exe</code> anywhere. No complex development environment or Node.js setup required.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Parallel Power</h3>
+                <p>Don't wait. Kick off builds for all platforms simultaneously and watch the logs stream in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Smart Packaging</h3>
+                <p>Automatically zips your build artifacts with correct cross-platform path handling. Ready to ship instantly.</p>
+            </div>
+        </section>
+
+        <section id="download" class="download-section">
+            <h2>Download</h2>
+            <p>Download the standalone build server and start automating your workflow.</p>
+            <div style="margin-top: 20px;">
+                <a href="#" class="btn">Download for Windows (.exe)</a>
+                <a href="#" class="btn btn-outline">Download for Linux (Binary)</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-dim);">
+                Requires <code>git</code> and <code>Unity</code> to be installed on the host machine.
+            </p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Copyright Daniel Serebro 2026</p>
+        <p>This project is not affiliated with Unity Software Inc.</p>
+        <p>Built with ❤️ for the Unity Community</p>
+    </footer>
+</body>
+</html>
