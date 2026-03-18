@@ -11,42 +11,56 @@
 - **Multi-Platform Support**: Built-in configurations for Windows, Linux, Mac, Android, and iOS.
 - **Portable Executable**: No development environment required on your build machine. Just run the standalone `SimplyShip.exe`.
 - **Headless Builds**: Fully automated builds using Unity's `-batchmode` and `-nographics`.
-- **Parallel Processing**: Kick off builds for multiple platforms at once.
+- **Parallel Processing**: Paid Feature: Kick off builds for multiple platforms at once.
 - **Smart Zipping**: Automatic packaging of build artifacts with cross-platform extraction compatibility.
-- **Live Logs**: Real-time log streaming from Unity directly to your browser.
+- **Live Logs**: Real-time log streaming from Unity directly to your browser (with multi-client syncing).
 - **Validation**: Integrated folder and configuration checking to catch errors before you build.
 
 ---
 
-## 🛠️ Quick Start
+## 🛠️ Setup Guide
 
-### 1. Prerequisites
-- **Unity Hub & Editors**: Installed at the path specified in your config.
-- **Git**: Installed and accessible via command line.
-- **Project Structure**: We recommend having separate directories for each platform (e.g., `MyProjectWindows`, `MyProjectAndroid`) to avoid slow asset re-imports.
+### 1. How Simply Ship Works
+Simply Ship automates **headless Unity builds**. Instead of opening Unity and switching platforms (which triggers slow asset re-imports), Simply Ship expects you to have a **separate cloned copy of your project for every platform** you intend to build. It then triggers Unity's command-line interface to build each of these projects in the background.
 
-### 2. Setup
-1. Download the latest `SimplyShip` executable for your platform.
-2. Place it in a folder of your choice.
-3. Run the executable. A default `build_config.txt` will be created automatically in the same directory.
+### 2. Organizing Your Folders
+Choose a single directory on your machine to be your `PROJECTS_BASE_PATH`. Inside this folder, you should have a separate cloned git repository for each platform.
 
-### 3. Usage
-1. Open `http://localhost:3000` in your browser.
-2. Use the **Project Configuration** section to set your Unity version, project name, and paths.
-3. Use the **Build Arguments** to toggle zipping, ignoring platforms, or parallel mode.
-4. Click **Start Build Process** and watch the magic happen.
+**Folder Naming Convention:**
+Folders must be named as: `[ProjectName][Platform]` or `[ProjectName][Platform]Dev`
+- **Windows:** `MyProjectWindows` & `MyProjectWindowsDev`
+- **Linux:** `MyProjectLinux` & `MyProjectLinuxDev`
+- **Android:** `MyProjectAndroid` & `MyProjectAndroidDev`
+
+> **Note:** If the system cannot find a folder for a specific platform, it will simply ignore that platform during the build process.
+
+### 3. Unity Build Profiles
+Inside your Unity projects, you must use **Build Profiles** (the `.asset` files introduced in newer Unity versions). Simply Ship relies on these profiles to know exactly what scenes and settings to use.
+
+**Profile Naming Requirements:**
+The system looks for specific filenames inside your `BUILD_PROFILES_PATH`:
+- **Production:** `Windows.asset`, `Linux.asset`, `Android.asset`, etc.
+- **Development (-dev flag):</strong> `WindowsDev.asset`, `LinuxDev.asset`, `AndroidDev.asset`, etc.
+
+### 4. Pre-Build Checklist
+- **Switch Platforms:** Each project folder must already be set to its target platform in Unity. Simply Ship **will not** switch platforms for you.
+- **Branch Management:** Each folder must be checked out to the git branch you want to build. Simply Ship **will not** change branches for you.
+- **Validate:** Use the **"Validate All"** button on the Builder page to ensure your paths and Unity versions are correctly recognized before starting.
 
 ---
 
-## 📂 Expected Directory Layout
+## 🔌 REST API
 
-To maximize build speed, Simply Ship expects separate project folders per platform:
+Simply Ship provides a simple REST endpoint to trigger builds from external tools or CI/CD pipelines.
 
-- `PROJECTS_BASE_PATH/`
-  - `ProjectNameWindows/`
-  - `ProjectNameLinux/`
-  - `ProjectNameAndroid/`
-  - ... (and so on)
+### Trigger Build
+- **Endpoint**: `POST /build`
+- **Description**: Starts a build using the configuration and build arguments currently saved in `build_config.txt`.
+
+**Example (cURL):**
+```bash
+curl -X POST http://localhost:3000/build
+```
 
 ---
 
