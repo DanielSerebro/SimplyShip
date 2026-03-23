@@ -4,6 +4,8 @@
 
 **Simply Ship** is a lightweight, portable, and automated build system designed to simplify the headache of Unity multi-platform deployments. It provides a clean web interface to manage headless builds across five major platforms simultaneously.
 
+![Simply Ship Preview](SimplyShipImage.png)
+
 ---
 
 ## 🚀 Key Features
@@ -29,40 +31,55 @@ Simply Ship is free for personal use. Premium features are available for commerc
 | Logs & Remote Trigger | ✔ | ✔ | ✔ |
 | **Parallel Build Support** | ✘ | ✔ | ✔ |
 | **Eligibility** | Personal | Teams < $250k & < 50 size | Teams ≥ $250k or ≥ 50 size |
-| **Price** | **Free** | **$50 AUD (One-off)** | **$500 AUD (One-off)** |
+| **Price** | **Free** | **$50 AUD (One-off)** | **Contact Us** |
 | | | [**Buy Now**](https://danthedev.lemonsqueezy.com/checkout) | [**Buy Now**](https://danthedev.lemonsqueezy.com/checkout) |
 
 ---
 
-## 🛠️ Quick Start
+## 🚀 Quick Start Guide
 
-### 1. Prerequisites
-- **Unity Hub & Editors**: Installed at the path specified in your config.
-- **Git**: Installed and accessible via command line.
-- **Project Structure**: We recommend having separate directories for each platform (e.g., `MyProjectWindows`, `MyProjectAndroid`) to avoid slow asset re-imports.
+Simply Ship automates headless Unity builds. Instead of opening Unity and switching platforms (which triggers slow asset re-imports), Simply Ship expects you to have a cloned copy of your project for every platform you intend to build. It then triggers Unity's command-line interface to build each of these projects in the background.
 
-### 2. Setup
-1. Download the latest `SimplyShip` executable for your platform.
-2. Place it in a folder of your choice.
-3. Run the executable. A default `build_config.txt` will be created automatically in the same directory.
+### 1. How it Works
+Simply Ship leverages Unity's command-line interface to trigger builds in the background across multiple project clones, ensuring you never have to wait for platform switching again.
 
-### 3. Usage
-1. Open `http://localhost:3000` in your browser.
-2. Use the **Project Configuration** section to set your Unity version, project name, and paths.
-3. Use the **Build Arguments** to toggle zipping, ignoring platforms, or parallel mode.
-4. Click **Start Build Process** and watch the magic happen.
+### 2. Organizing Your Folders
+Choose a single directory on your machine to be your `PROJECTS_BASE_PATH`. Inside this folder, you should have a separate cloned git repository for each platform.
 
----
+#### Folder Naming Convention
+Folders must be named as: `[ProjectName][Platform]` or `[ProjectName][Platform]Dev`
 
-## 📂 Expected Directory Layout
+- **Windows**: `SpookerWindows` & `SpookerWindowsDev`
+- **Linux**: `SpookerLinux` & `SpookerLinuxDev`
+- **Android**: `SpookerAndroid` & `SpookerAndroidDev`
 
-To maximize build speed, Simply Ship expects separate project folders per platform:
+**Automatic Skipping:**
+If the system cannot find a folder for a specific platform (e.g., `SpookerMac` is missing), it will simply ignore that platform during the build process.
 
-- `PROJECTS_BASE_PATH/`
-  - `ProjectNameWindows/`
-  - `ProjectNameLinux/`
-  - `ProjectNameAndroid/`
-  - ... (and so on)
+### 3. Unity Build Profiles
+Inside your Unity projects, you must use **Build Profiles** (the `.asset` files introduced in newer Unity versions). Simply Ship relies on these profiles to know exactly what scenes and settings to use.
+
+#### Profile Naming Requirements
+The system looks for specific filenames inside your `BUILD_PROFILES_PATH`:
+
+- **Production**: `Windows.asset`, `Linux.asset`, `Android.asset`, etc.
+- **Development** (`-dev` flag): `WindowsDev.asset`, `LinuxDev.asset`, `AndroidDev.asset`, etc.
+
+*Note: The "Windows", "Linux" etc. parts are defined by your `PROFILE_NAME_XXX` settings in the config.*
+
+### 4. Pre-Build Checklist
+- **Switch Platforms**: Each project folder must already be set to its target platform in Unity. Simply Ship will not switch platforms for you.
+- **Branch Management**: Each folder must be checked out to the git branch you want to build. Simply Ship will not change branches for you.
+- **Validate**: Use the **"Validate All"** button on the Builder page to ensure your paths and Unity versions are correctly recognized before starting.
+
+### 5. REST API (Remote Trigger)
+You can trigger a build from a script or CI/CD pipeline by sending a POST request. It will use the settings currently saved in your config file.
+
+```bash
+curl -X POST http://localhost:3000/build
+```
+
+**Monitoring**: The API returns immediately. You can monitor progress by keeping the web UI open (it will sync automatically) or by checking `build.log`.
 
 ---
 

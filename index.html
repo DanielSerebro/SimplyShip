@@ -43,6 +43,20 @@
             margin: 0 auto 30px;
         }
 
+        .hero-image-wrap {
+            margin-top: 36px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: min(100%, 560px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 22px 48px rgba(15, 23, 42, 0.5);
+            opacity: 0.98;
+        }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -183,6 +197,20 @@
             border-radius: 4px;
             font-family: 'Fira Code', monospace;
         }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 64px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+
+            .hero-image {
+                width: min(100%, 420px);
+            }
+        }
     </style>
 </head>
 <body>
@@ -193,6 +221,13 @@
             <a href="#download" class="btn">Get Started</a>
             <a href="https://danthedev.lemonsqueezy.com/checkout" class="btn btn-premium">Buy Premium</a>
             <a href="https://github.com/DanielSerebro/SimplyShip" class="btn btn-outline">Read Documentation</a>
+        </div>
+        <div class="hero-image-wrap">
+            <img
+                src="SimplyShipImage.png"
+                alt="Simply Ship interface preview"
+                class="hero-image"
+            >
         </div>
     </header>
 
