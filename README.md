@@ -29,7 +29,7 @@ Simply Ship is free for personal use. Premium features are available for commerc
 | Logs & Remote Trigger | ✔ | ✔ | ✔ |
 | **Parallel Build Support** | ✘ | ✔ | ✔ |
 | **Eligibility** | Personal | Teams < $250k & < 50 size | Teams ≥ $250k or ≥ 50 size |
-| **Price** | **Free** | **$50 AUD (One-off)** | **Contact Us** |
+| **Price** | **Free** | **$50 AUD (One-off)** | **$500 AUD (One-off)** |
 | | | [**Buy Now**](https://danthedev.lemonsqueezy.com/checkout) | [**Buy Now**](https://danthedev.lemonsqueezy.com/checkout) |
 
 ---
