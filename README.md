@@ -11,6 +11,7 @@
 ## 🚀 Key Features
 
 - **Multi-Platform Support**: Built-in configurations for Windows, Linux, Mac, Android, and iOS.
+- **Steam Integration**: Battle tested and dogfooded at my own studio to work smoothly with Steam.
 - **Portable Executable**: No development environment required on your build machine. Just run the standalone `SimplyShip.exe`.
 - **Headless Builds**: Fully automated builds using Unity's `-batchmode` and `-nographics`.
 - **Parallel Processing**: Kick off builds for multiple platforms at once.
