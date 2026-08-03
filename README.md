@@ -11,6 +11,8 @@
 ## 🚀 Key Features
 
 - **Multi-Platform Support**: Built-in configurations for Windows, Linux, Mac, Android, and iOS.
+- **Multi-Configuration Management**: Store any number of named configurations in a single, human-readable `build_config.txt`. Switch between them, duplicate, or rename them right from the web UI.
+- **Build Queueing**: Queue up multiple configurations to build back-to-back in a chosen order, unattended.
 - **Steam Integration**: Battle tested and dogfooded at my own studio to work smoothly with Steam.
 - **Portable Executable**: No development environment required on your build machine. Just run the standalone `SimplyShip.exe`.
 - **Headless Builds**: Fully automated builds using Unity's `-batchmode` and `-nographics`.
@@ -58,13 +60,46 @@ The system looks for specific filenames inside your `BUILD_PROFILES_PATH`:
 
 *Note: The "Windows", "Linux" etc. parts are defined by your `PROFILE_NAME_XXX` settings in the config.*
 
-### 4. Pre-Build Checklist
+### 4. Managing Configurations
+`build_config.txt` can hold any number of named configurations — handy if you build multiple projects, or just want separate Dev/Production setups, from the same Simply Ship instance. The file stays a single, plain-text, easy-to-diff-and-share file; each configuration just lives under its own `[ConfigName]` section:
+
+```ini
+ACTIVE_CONFIG=Spooker
+
+[Spooker]
+UNITY_EDITORS_PATH=...
+PROJECT_NAME=Spooker
+...
+
+[SpookerDev]
+UNITY_EDITORS_PATH=...
+PROJECT_NAME=SpookerDev
+...
+```
+
+On the Builder page, the **configuration dropdown** at the top of the settings panel lets you:
+- **Switch** between saved configurations — the form (and `ACTIVE_CONFIG`) updates instantly.
+- **+ New** a blank configuration, or **Duplicate** the current one as a starting point.
+- **Rename** or **Delete** a configuration.
+
+Any field you edit is always saved to whichever configuration is currently active, so you never have to worry about overwriting the wrong setup.
+
+> **Upgrading from an older version?** If your existing `build_config.txt` doesn't yet use `[ConfigName]` sections, Simply Ship migrates it automatically the first time it's read — your settings are wrapped in a single section and nothing is lost.
+
+### 5. Queueing Multiple Builds
+Before starting a build, choose how you want it to run:
+- **Run current configuration** — the standard, single-configuration build.
+- **Queue multiple configurations** — pick any number of saved configurations, arrange them in order, and Simply Ship will build each one to full completion (Unity build, zipping, optional Steam upload) before starting the next. Handy for shipping several projects, or Dev + Production builds, unattended in one sitting.
+
+The queue can be reordered or removed from before you start, and **Cancel Build** will stop the entire queue, not just the build currently in progress.
+
+### 6. Pre-Build Checklist
 - **Switch Platforms**: Each project folder must already be set to its target platform in Unity. Simply Ship will not switch platforms for you.
 - **Branch Management**: Each folder must be checked out to the git branch you want to build. Simply Ship will not change branches for you.
 - **Validate**: Use the **"Validate All"** button on the Builder page to ensure your paths and Unity versions are correctly recognized before starting.
 
-### 5. REST API (Remote Trigger)
-You can trigger a build from a script or CI/CD pipeline by sending a POST request. It will use the settings currently saved in your config file.
+### 7. REST API (Remote Trigger)
+You can trigger a build from a script or CI/CD pipeline by sending a POST request. It will use the settings currently saved in your **active** configuration.
 
 ```bash
 curl -X POST http://localhost:3000/build
