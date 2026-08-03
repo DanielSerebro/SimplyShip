@@ -4,7 +4,7 @@
 
 **Simply Ship** is a lightweight, portable, and automated build system designed to simplify the headache of Unity multi-platform deployments. It provides a clean web interface to manage headless builds across five major platforms simultaneously.
 
-![Simply Ship Preview](SimplyShipImage.png)
+![Simply Ship Preview](SimplyShipImage_V1_3.png)
 
 ---
 
